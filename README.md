@@ -1,6 +1,6 @@
 # Welcome to the Assessment Generator by Lyzr!
 
-![Lyzr Logo](./logo/yzr-logo.png)
+![Lyzr Logo](.\logo\lyzr-logo.png)
 
 In this Assessment Generator you can upload any textbook PDF, specify the subject and major topics, and instantly generate 10 insightful questions per topic using an AI-powered QA bot Agent from Lyzr SDK. 
 
