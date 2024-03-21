@@ -127,6 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+litellm_uuid.txt
 
 # Spyder project settings
 .spyderproject
