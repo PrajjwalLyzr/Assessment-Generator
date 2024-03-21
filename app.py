@@ -81,7 +81,8 @@ if __name__ == "__main__":
                 vector_params = vector_store_configuration(filename)
                 study_agent = smartstudy_bot(filepath=filepath, vector_params=vector_params)
                 if study_agent is not None:
-                    utils.user_subject_topics(agent=study_agent, subject=subject_name, topics_lst=topics_list)
+                    topic_response = utils.user_subject_topics(agent=study_agent, subject=subject_name, topics_lst=topics_list)
+                    utils.flashcard_viewer(response=topic_response)
     else:
         utils.remove_existing_files(data)
         st.warning('Please Upload pdf file')

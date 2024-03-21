@@ -46,13 +46,26 @@ def save_uploaded_file(uploaded_file):
 
 
 def user_subject_topics(agent, subject, topics_lst):
-        prompt = f"""You are an expert of this {subject}, Can you write down 10-15 questions on this {subject} and its topics: {topics_lst} """
-        response = agent.query(prompt)
-        if response is not None:
-            if response.response == 'Empty Response':
-                st.warning('Please provide valid pdf')
+        resposne_flash = {}
+        for topic in topics_lst:
+            prompt = f"""You are an expert of this {subject}, Can you write down 3-5 important questions on this {subject} and its topics: {topic} """
+            response = agent.query(prompt)
+            if response is not None:
+                if response.response == 'Empty Response':
+                    st.warning('Please provide valid pdf')
 
-            elif response.response != 'Empty Response':
-                st.subheader("These are the Important Questions, you should prepare")
-                st.write(response.response)        
+                elif response.response != 'Empty Response':
+                    # st.subheader("These are the Important Questions, you should prepare")
+                    # st.write(response.response)    
+                    resposne_flash[topic] = response.response.split('?')
+        
+        return resposne_flash
+
+
+def flashcard_viewer(response:dict):
+    for topic, questions in response.items():
+        st.subheader(topic)
+        for question in questions:
+            st.write(question)
+        st.markdown("---")  
 
