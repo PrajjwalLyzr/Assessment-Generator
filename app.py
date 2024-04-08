@@ -45,22 +45,22 @@ os.makedirs(data, exist_ok=True)
 
  
 
-def vector_store_configuration(bookname):
-    vector_store_params = {
-    "vector_store_type": "WeaviateVectorStore",
-    "url": os.getenv('VECTOR_STORE_URL'), # replce the url with your weaviate cluster url
-    "api_key": os.getenv('VECTOR_STORE_API'), # replace the api with your weaviate cluster api
-    "index_name": f"Book{bookname}IndexName" 
-  }
+# def vector_store_configuration(bookname):
+#     vector_store_params = {
+#     "vector_store_type": "WeaviateVectorStore",
+#     "url": os.getenv('VECTOR_STORE_URL'), # replce the url with your weaviate cluster url
+#     "api_key": os.getenv('VECTOR_STORE_API'), # replace the api with your weaviate cluster api
+#     "index_name": f"Book{bookname}IndexName" 
+#   }
     
-    return vector_store_params
+#     return vector_store_params
 
 
-def smartstudy_bot(filepath, vector_params):
+def smartstudy_bot(filepath, vector_params=None):
     "This function will implement the Lyzr's QA agent to summarize the Youtube Video"
     smartstudy = QABot.pdf_qa(
             input_files=[str(filepath)],
-            vector_store_params=vector_params
+            # vector_store_params=vector_params
         )
     
     return smartstudy
@@ -79,7 +79,7 @@ if __name__ == "__main__":
                 path = utils.get_files_in_directory(data)
                 filepath = path[0]
                 vector_params = vector_store_configuration(filename)
-                study_agent = smartstudy_bot(filepath=filepath, vector_params=vector_params)
+                study_agent = smartstudy_bot(filepath=filepath)
                 if study_agent is not None:
                     topic_response = utils.user_subject_topics(agent=study_agent, subject=subject_name, topics_lst=topics_list)
                     utils.flashcard_viewer(response=topic_response)
