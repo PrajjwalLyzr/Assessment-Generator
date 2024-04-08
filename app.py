@@ -78,7 +78,7 @@ if __name__ == "__main__":
             if st.button("Generate"):
                 path = utils.get_files_in_directory(data)
                 filepath = path[0]
-                vector_params = vector_store_configuration(filename)
+                # vector_params = vector_store_configuration(filename)
                 study_agent = smartstudy_bot(filepath=filepath)
                 if study_agent is not None:
                     topic_response = utils.user_subject_topics(agent=study_agent, subject=subject_name, topics_lst=topics_list)
